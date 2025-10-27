@@ -1,73 +1,84 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Define Notification Service
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Lightweight NestJS service that will eventually handle all notification delivery for the Define platform.  
+Right now it exposes a simple in-memory queue and REST endpoints so future delivery logic (email, SMS, push, etc.) has a clean entry point.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## Getting Started
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### Prerequisites
+- Node.js 18+
+- npm 9+
 
-## Installation
-
+### Install dependencies
 ```bash
-$ npm install
+npm install
 ```
 
-## Running the app
-
+### Run the development server
 ```bash
-# development
-$ npm run start
+npm run start:dev
+```
+The service boots on `http://localhost:3005` by default.
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+### Run the test suite
+```bash
+npm test
 ```
 
-## Test
+---
 
-```bash
-# unit tests
-$ npm run test
+## Configuration
 
-# e2e tests
-$ npm run test:e2e
+| Environment Variable | Default | Notes |
+| -------------------- | ------- | ----- |
+| `PORT` | `3005` | HTTP port for the NestJS app |
+| `FRONTEND_ORIGIN` | `http://localhost:5173` | Comma-separated list of origins allowed for CORS |
 
-# test coverage
-$ npm run test:cov
+---
+
+## API Overview
+
+| Method | Path | Description |
+| ------ | ---- | ----------- |
+| `GET` | `/notifications` | Return queued notifications (in-memory list) |
+| `POST` | `/notifications` | Queue a new notification payload |
+
+### POST `/notifications` payload
+```json
+{
+  "channel": "email",
+  "recipient": "user@example.com",
+  "subject": "Welcome",
+  "body": "Thanks for signing up!",
+  "metadata": { "category": "onboarding" }
+}
 ```
 
-## Support
+---
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Project Structure
 
-## Stay in touch
+```
+src/
+  app.module.ts              # Application root that wires the notification module
+  notifications/
+    notifications.controller.ts  # REST endpoints
+    notifications.service.ts      # In-memory queue + future delivery hook
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+---
 
-## License
+## Next Steps
+1. Add validation (class-validator) for notification payloads.
+2. Integrate a durable queue or database for persistence.
+3. Implement delivery adapters (email, SMS, push) that consume the queued records.
 
-Nest is [MIT licensed](LICENSE).
+---
+
+## Contributing
+
+1. Fork or branch from `main`.
+2. Run `npm test` before pushing changes.
+3. Open a Pull Request with a clear description of the change and testing notes.

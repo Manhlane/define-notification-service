@@ -1,7 +1,7 @@
 {
   "name": "define-notificiation-service",
   "version": "0.0.1",
-  "description": "",
+  "description": "NestJS notification service scaffold for Define platform messaging.",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
