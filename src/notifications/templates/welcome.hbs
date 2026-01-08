@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Welcome to define!</title>
+  </head>
+
+  <body style="margin:0; padding:0; background:#f5f6f7; font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;">
+    <div style="max-width:640px; margin:48px auto; background:#ffffff; border-radius:20px; padding:48px; border:1px solid #e5e7eb; box-shadow:0 4px 20px rgba(0,0,0,0.04);">
+      <h1 style="margin:0; font-size:34px; font-weight:900; color:#000;">
+        Welcome to dfn<span style="color:#000">!.</span>
+      </h1>
+
+      <p style="margin-top:20px; font-size:18px; color:#374151; line-height:1.6;">
+        Hey
+        {{#if name}}
+          {{name}}
+        {{else}}
+          there
+        {{/if}},<br /><br />
+        Thank you for joining us this early.
+      </p>
+
+      <p style="margin-top:16px; font-size:16px; color:#4b5563; line-height:1.65;">
+        Define! was created for a simple reason: creators deserve systems that respect their work,
+        their time, and their money. For years, getting paid has been the slowest and most
+        frustrating part of the creative process. We're changing that—carefully, intentionally,
+        and with a long-term view.
+      </p>
+
+      {{#if verificationUrl}}
+        <div style="margin-top:36px; text-align:center;">
+          <a href="{{verificationUrl}}" style="display:inline-block; background:transparent; color:#000; border:2px solid #000; text-decoration:none; padding:16px 32px; font-size:16px; font-weight:600; border-radius:9999px; letter-spacing:0.1px;">
+            Verify your email
+          </a>
+        </div>
+
+        <p style="margin-top:28px; font-size:14px; color:#6b7280; text-align:center;">
+          If the button doesn’t work, use this link:
+        </p>
+
+        <p style="word-break:break-all; font-size:14px; color:#111827; text-align:center; margin-top:4px;">
+          {{verificationUrl}}
+        </p>
+      {{/if}}
+
+      <h2 style="margin:40px 0 0; font-size:20px; font-weight:700; color:#000;">
+        Here’s what you can expect inside:
+      </h2>
+
+      <ul style="margin-top:20px; padding-left:18px; font-size:15px; color:#4b5563; line-height:1.7;">
+        <li><strong style="color:#000;">A clean, focused dashboard</strong> built for creators, not corporations.</li>
+        <li><strong style="color:#000;">A secure escrow system</strong> that keeps both sides protected from delays or disputes.</li>
+        <li><strong style="color:#000;">Your own booking link</strong>, ready to be shared on Instagram, WhatsApp, TikTok, and anywhere clients find you.</li>
+        <li><strong style="color:#000;">A smooth, organised workflow</strong> that removes unnecessary admin from your creative process.</li>
+      </ul>
+
+      <p style="margin-top:28px; font-size:16px; color:#374151; line-height:1.65;">
+        And this is only the beginning. What you see now is the foundation — every next layer of define! will be built with the same clarity, purpose, and creator-first approach.
+      </p>
+
+      <p style="margin-top:40px; font-size:14px; color:#9ca3af; text-align:center;">
+        Thank you again for being part of this early stage.<br />
+        Let’s build something valuable.
+      </p>
+
+      <p style="margin-top:12px; font-size:14px; color:#9ca3af; text-align:center;">
+        — The define!. team
+      </p>
+    </div>
+  </body>
+</html>

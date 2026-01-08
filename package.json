@@ -17,14 +17,29 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "preview:welcome": "ts-node --project tsconfig.json scripts/render-email.ts auth.welcome",
+    "preview:verify": "ts-node --project tsconfig.json scripts/render-email.ts auth.verify-email",
+    "preview:reset": "ts-node --project tsconfig.json scripts/render-email.ts auth.password-reset",
+    "preview:login": "ts-node --project tsconfig.json scripts/render-email.ts auth.login-alert",
+    "preview:password-change": "ts-node --project tsconfig.json scripts/render-email.ts auth.password-changed",
+    "preview:emails": "ts-node --project tsconfig.json scripts/render-email.ts all"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
+    "@nestjs/microservices": "^10.4.20",
     "@nestjs/platform-express": "^10.0.0",
+    "@nestjs/swagger": "^7.4.2",
+    "handlebars": "^4.7.8",
+    "amqp-connection-manager": "^5.0.0",
+    "amqplib": "^0.10.9",
+    "dotenv": "^17.2.3",
+    "form-data": "^4.0.0",
+    "mailgun.js": "^10.2.1",
     "reflect-metadata": "^0.2.0",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
@@ -53,12 +68,13 @@
     "moduleFileExtensions": [
       "js",
       "json",
-      "ts"
+      "ts",
+      "tsx"
     ],
     "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
+      "^.+\\.(t|j)sx?$": "ts-jest"
     },
     "collectCoverageFrom": [
       "**/*.(t|j)s"
