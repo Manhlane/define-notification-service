@@ -82,5 +82,6 @@ jobs:
       - name: Push Docker image
         run: |
           IMAGE=ghcr.io/${{ github.repository }}/define-notification-service
+          IMAGE=$(echo "$IMAGE" | tr '[:upper:]' '[:lower:]')
           docker push $IMAGE:${{ github.sha }}
           docker push $IMAGE:latest
