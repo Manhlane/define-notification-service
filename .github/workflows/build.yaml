@@ -7,6 +7,11 @@ on:
     branches: [main, develop]
   workflow_dispatch: {}
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_OWNER: manhlane
+  IMAGE_NAME: define-notification-service
+
 jobs:
   install-and-lint:
     name: 🧹 Install & Lint
@@ -73,7 +78,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          IMAGE=ghcr.io/${{ github.repository }}/define-notification-service
+          IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/${{ env.IMAGE_NAME }}
           docker build \
             -t $IMAGE:${{ github.sha }} \
             -t $IMAGE:latest \
@@ -81,7 +86,6 @@ jobs:
 
       - name: Push Docker image
         run: |
-          IMAGE=ghcr.io/${{ github.repository }}/define-notification-service
-          IMAGE=$(echo "$IMAGE" | tr '[:upper:]' '[:lower:]')
+          IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_OWNER }}/${{ env.IMAGE_NAME }}
           docker push $IMAGE:${{ github.sha }}
           docker push $IMAGE:latest
