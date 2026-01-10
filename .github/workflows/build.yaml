@@ -16,7 +16,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_OWNER: manhlane
-  IMAGE_NAME: define-auth-service
+  IMAGE_NAME: define-notification-service
 
 jobs:
   install-and-lint:
