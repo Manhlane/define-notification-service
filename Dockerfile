@@ -21,7 +21,7 @@ RUN npm ci --omit=dev
 FROM deps AS dev
 ENV NODE_ENV=development
 COPY . .
-EXPOSE 3005
+EXPOSE 3001
 CMD ["npm", "run", "start:dev"]
 
 FROM base AS prod
