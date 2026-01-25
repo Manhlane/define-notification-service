@@ -38,7 +38,7 @@ async function bootstrap() {
   await app.startAllMicroservices();
 
   const port = Number(process.env.PORT ?? 3005);
-  await app.listen(port);
+  await app.listen(port, '0.0.0.0');
   logger.log(`Server running on http://localhost:${port}`);
   logger.log(`CORS enabled for: ${corsOrigins.join(', ')}`);
 }
