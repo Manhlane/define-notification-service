@@ -50,7 +50,7 @@ export class MailgunService {
   async sendEmail(options: SendEmailOptions): Promise<string | null> {
 
     this.logger.debug(`Mailgun env status`, {
-      apiKey: !!process.env.MAILGUN_API_KEY,
+      apiKey: process.env.MAILGUN_API_KEY,
       domain: this.domain,
       from: this.fromAddress,
     });
