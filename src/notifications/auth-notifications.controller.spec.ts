@@ -52,11 +52,14 @@ describe('AuthNotificationsController', () => {
   });
 
   it('queues a welcome email with metadata', async () => {
-    const record = await controller.sendWelcome({
-      email: 'user@example.com',
-      name: 'User',
-      verificationUrl: 'https://app.define.local/verify',
-    });
+    const record = await controller.sendWelcome(
+      {
+        email: 'user@example.com',
+        name: 'User',
+        verificationUrl: 'https://app.define.local/verify',
+      },
+      { headers: {}, socket: {} } as any,
+    );
 
     expect(record.metadata).toMatchObject({
       template: 'auth.welcome',
@@ -65,11 +68,14 @@ describe('AuthNotificationsController', () => {
   });
 
   it('queues a password reset email with link metadata', async () => {
-    const record = await controller.sendPasswordReset({
-      email: 'user@example.com',
-      resetUrl: 'https://define.local/reset?token=123',
-      expiresInMinutes: 30,
-    });
+    const record = await controller.sendPasswordReset(
+      {
+        email: 'user@example.com',
+        resetUrl: 'https://define.local/reset?token=123',
+        expiresInMinutes: 30,
+      },
+      { headers: {}, socket: {} } as any,
+    );
 
     expect(record.metadata).toMatchObject({
       template: 'auth.password-reset',
@@ -78,11 +84,14 @@ describe('AuthNotificationsController', () => {
   });
 
   it('queues a password changed confirmation email', async () => {
-    const record = await controller.sendPasswordChanged({
-      email: 'user@example.com',
-      name: 'User',
-      changedAt: '2024-02-10T12:00:00.000Z',
-    });
+    const record = await controller.sendPasswordChanged(
+      {
+        email: 'user@example.com',
+        name: 'User',
+        changedAt: '2024-02-10T12:00:00.000Z',
+      },
+      { headers: {}, socket: {} } as any,
+    );
 
     expect(record.metadata).toMatchObject({
       template: 'auth.password-changed',

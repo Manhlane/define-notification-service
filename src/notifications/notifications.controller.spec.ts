@@ -58,17 +58,20 @@ describe('NotificationsController', () => {
       body: 'You have a new message',
     });
 
-    const all = controller.findAll();
+    const all = controller.findAll({ headers: {}, socket: {} } as any);
     expect(all).toHaveLength(1);
     expect(all[0].channel).toBe('push');
   });
 
   it('queues notifications from POST payload', async () => {
-    const record = await controller.create({
-      channel: 'sms',
-      recipient: '+1234567',
-      body: 'Two factor code: 123456',
-    });
+    const record = await controller.create(
+      {
+        channel: 'sms',
+        recipient: '+1234567',
+        body: 'Two factor code: 123456',
+      },
+      { headers: {}, socket: {} } as any,
+    );
 
     expect(record.channel).toBe('sms');
     expect(service.list()).toContainEqual(record);
