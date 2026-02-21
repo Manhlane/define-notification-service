@@ -2,71 +2,97 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Welcome to define!</title>
+    <title>Welcome to dfn!.</title>
   </head>
 
-  <body style="margin:0; padding:0; background:#f5f6f7; font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;">
-    <div style="max-width:640px; margin:48px auto; background:#ffffff; border-radius:20px; padding:48px; border:1px solid #e5e7eb; box-shadow:0 4px 20px rgba(0,0,0,0.04);">
-      <h1 style="margin:0; font-size:34px; font-weight:900; color:#000;">
-        Welcome to dfn<span style="color:#000">!.</span>
+  <body style="margin:0; padding:0; background:#ffffff; font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; color:#000;">
+
+    <div style="max-width:560px; margin:72px auto; padding:0 24px;">
+
+      <!-- Logo -->
+      <div style="font-size:20px; font-weight:600; letter-spacing:-0.02em;">
+        dfn!.
+      </div>
+
+      <!-- Hero -->
+      <h1 style="margin:56px 0 28px; font-size:44px; font-weight:600; line-height:1.05; letter-spacing:-0.03em;">
+        Get paid before the shoot.
       </h1>
 
-      <p style="margin-top:20px; font-size:18px; color:#374151; line-height:1.6;">
-        Hey
-        {{#if name}}
-          {{name}}
-        {{else}}
-          there
-        {{/if}},<br /><br />
-        Thank you for joining us this early.
+      <!-- Greeting -->
+      <p style="margin:0 0 20px; font-size:18px; line-height:1.6;">
+        Hey {{#if name}}{{name}}{{else}}there{{/if}},
       </p>
 
-      <p style="margin-top:16px; font-size:16px; color:#4b5563; line-height:1.65;">
-        Define! was created for a simple reason: creators deserve systems that respect their work,
-        their time, and their money. For years, getting paid has been the slowest and most
-        frustrating part of the creative process. We're changing that—carefully, intentionally,
-        and with a long-term view.
+      <!-- Core Message -->
+      <p style="margin:0 0 20px; font-size:18px; line-height:1.6;">
+        You joined early — and that matters.
+      </p>
+
+      <p style="margin:0 0 20px; font-size:18px; line-height:1.6;">
+        dfn!. was built from a simple frustration:
+        talented creators doing great work,
+        then waiting… and waiting… to get paid.
+      </p>
+
+      <p style="margin:0 0 20px; font-size:18px; line-height:1.6;">
+        We’re changing that.
+      </p>
+
+      <p style="margin:0 0 36px; font-size:18px; line-height:1.6;">
+        This is the beginning of a system designed to protect your time,
+        your work, and your money.
       </p>
 
       {{#if verificationUrl}}
-        <div style="margin-top:36px; text-align:center;">
-          <a href="{{verificationUrl}}" style="display:inline-block; background:transparent; color:#000; border:2px solid #000; text-decoration:none; padding:16px 32px; font-size:16px; font-weight:600; border-radius:9999px; letter-spacing:0.1px;">
+        <div style="margin-bottom:40px;">
+          <a href="{{verificationUrl}}"
+             style="display:inline-block;
+                    background:#fff;
+                    color:#000;
+                    border:2px solid #000;
+                    text-decoration:none;
+                    padding:16px 28px;
+                    font-size:15px;
+                    font-weight:600;
+                    border-radius:0;">
             Verify your email
           </a>
         </div>
-
-        <p style="margin-top:28px; font-size:14px; color:#6b7280; text-align:center;">
-          If the button doesn’t work, use this link:
-        </p>
-
-        <p style="word-break:break-all; font-size:14px; color:#111827; text-align:center; margin-top:4px;">
-          {{verificationUrl}}
-        </p>
       {{/if}}
 
-      <h2 style="margin:40px 0 0; font-size:20px; font-weight:700; color:#000;">
-        Here’s what you can expect inside:
-      </h2>
+      <!-- Startup Journey Section -->
+      <div style="margin-top:48px; font-size:16px; line-height:1.6;">
+        <p style="margin:0 0 16px;">
+          Right now, define! is focused on one thing:
+        </p>
 
-      <ul style="margin-top:20px; padding-left:18px; font-size:15px; color:#4b5563; line-height:1.7;">
-        <li><strong style="color:#000;">A clean, focused dashboard</strong> built for creators, not corporations.</li>
-        <li><strong style="color:#000;">A secure escrow system</strong> that keeps both sides protected from delays or disputes.</li>
-        <li><strong style="color:#000;">Your own booking link</strong>, ready to be shared on Instagram, WhatsApp, TikTok, and anywhere clients find you.</li>
-        <li><strong style="color:#000;">A smooth, organised workflow</strong> that removes unnecessary admin from your creative process.</li>
-      </ul>
+        <p style="margin:0 0 16px; font-weight:600;">
+          Securing payments before the work begins.
+        </p>
 
-      <p style="margin-top:28px; font-size:16px; color:#374151; line-height:1.65;">
-        And this is only the beginning. What you see now is the foundation — every next layer of define! will be built with the same clarity, purpose, and creator-first approach.
-      </p>
+        <p style="margin:0;">
+          As we grow, we’ll build more layers on top of this foundation —
+          but always with clarity, simplicity, and creator-first thinking.
+        </p>
+      </div>
 
-      <p style="margin-top:40px; font-size:14px; color:#9ca3af; text-align:center;">
-        Thank you again for being part of this early stage.<br />
-        Let’s build something valuable.
-      </p>
+      <!-- Closing -->
+      <div style="margin-top:64px; font-size:14px;">
+        <p style="margin:0 0 8px;">
+          Thank you for being here this early.
+        </p>
 
-      <p style="margin-top:12px; font-size:14px; color:#9ca3af; text-align:center;">
-        — The define!. team
-      </p>
+        <p style="margin:0;">
+          Let’s build something valuable.
+        </p>
+      </div>
+
+      <div style="margin-top:40px; font-size:12px; color:#6b7280;">
+        © {{year}} define!.
+      </div>
+
     </div>
+
   </body>
 </html>
