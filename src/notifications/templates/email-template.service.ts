@@ -248,7 +248,7 @@ const LAYOUT_TEMPLATE = `
         background-color: #111827;
         color: #ffffff;
         text-decoration: none;
-        border-radius: 999px;
+        border-radius: 8px;
         font-weight: 600;
       }
       p {
