@@ -32,9 +32,24 @@ export type AuthTemplatePayloadMap = {
   };
 };
 
-export type NotificationMetadataMap = AuthTemplatePayloadMap;
+export type PaymentTemplatePayloadMap = {
+  'payment.payment-link-created': {
+    customerName?: string;
+    paymentUrl: string;
+    serviceName: string;
+    providerName: string;
+    currency: string;
+    amount: number | string;
+    paymentReference?: string;
+  };
+};
 
-export type NotificationMetadata<T extends NotificationTemplate = NotificationTemplate> = {
+export type NotificationMetadataMap = AuthTemplatePayloadMap &
+  PaymentTemplatePayloadMap;
+
+export type NotificationMetadata<
+  T extends NotificationTemplate = NotificationTemplate,
+> = {
   template: T;
   data: NotificationMetadataMap[T];
 };

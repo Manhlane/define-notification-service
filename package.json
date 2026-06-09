@@ -23,6 +23,7 @@
     "preview:reset": "ts-node --project tsconfig.json scripts/render-email.ts auth.password-reset",
     "preview:login": "ts-node --project tsconfig.json scripts/render-email.ts auth.login-alert",
     "preview:password-change": "ts-node --project tsconfig.json scripts/render-email.ts auth.password-changed",
+    "preview:payment-link": "ts-node --project tsconfig.json scripts/render-email.ts payment.payment-link-created",
     "preview:emails": "ts-node --project tsconfig.json scripts/render-email.ts all"
   },
   "dependencies": {

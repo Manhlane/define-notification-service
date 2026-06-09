@@ -68,18 +68,38 @@ const PREVIEWS: Record<NotificationTemplate, PreviewConfig> = {
     },
     fileName: 'password-changed-preview.html',
   },
+  'payment.payment-link-created': {
+    metadata: {
+      template: 'payment.payment-link-created',
+      data: {
+        customerName: 'Thandi',
+        paymentUrl: 'https://define.local/payment/dfn_example',
+        serviceName: 'Wedding Photography - Full Day',
+        providerName: 'Ava Studio',
+        currency: 'ZAR',
+        amount: 8500,
+        paymentReference: 'DFN-2026-0001',
+      },
+    },
+    fileName: 'payment-link-created-preview.html',
+  },
 };
 
 async function render(target?: NotificationTemplate | 'all'): Promise<void> {
   const service = new EmailTemplateService();
-  const entries = Object.entries(PREVIEWS) as [NotificationTemplate, PreviewConfig][];
+  const entries = Object.entries(PREVIEWS) as [
+    NotificationTemplate,
+    PreviewConfig,
+  ][];
   const targets =
     target && target !== 'all'
       ? entries.filter(([template]) => template === target)
       : entries;
 
   if (targets.length === 0) {
-    throw new Error(`Unknown template "${target}". Available: ${Object.keys(PREVIEWS).join(', ')}`);
+    throw new Error(
+      `Unknown template "${target}". Available: ${Object.keys(PREVIEWS).join(', ')}`,
+    );
   }
 
   const outDir = join(process.cwd(), 'preview');
@@ -96,8 +116,10 @@ async function render(target?: NotificationTemplate | 'all'): Promise<void> {
 
 const [, , templateArg] = process.argv;
 
-render(templateArg as NotificationTemplate | 'all' | undefined).catch((error) => {
-  // eslint-disable-next-line no-console
-  console.error('Failed to render email preview', error);
-  process.exit(1);
-});
+render(templateArg as NotificationTemplate | 'all' | undefined).catch(
+  (error) => {
+    // eslint-disable-next-line no-console
+    console.error('Failed to render email preview', error);
+    process.exit(1);
+  },
+);

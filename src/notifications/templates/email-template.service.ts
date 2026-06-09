@@ -21,9 +21,8 @@ type TemplateDefinitionBase<TData> = {
   fullDocument?: boolean;
 };
 
-type TemplateDefinition<T extends NotificationTemplate> = TemplateDefinitionBase<
-  NotificationMetadata<T>['data']
->;
+type TemplateDefinition<T extends NotificationTemplate> =
+  TemplateDefinitionBase<NotificationMetadata<T>['data']>;
 
 type TemplateDefinitionMap = {
   [K in NotificationTemplate]: TemplateDefinition<K>;
@@ -39,13 +38,19 @@ type LayoutContext = {
 @Injectable()
 export class EmailTemplateService {
   private readonly layoutTemplate: TemplateDelegate<LayoutContext>;
-  private readonly defaultFooterTemplate: TemplateDelegate<Record<string, unknown>>;
+  private readonly defaultFooterTemplate: TemplateDelegate<
+    Record<string, unknown>
+  >;
   private readonly templates: TemplateDefinitionMap;
-  private readonly genericTemplate: TemplateDefinitionBase<Record<string, never>>;
+  private readonly genericTemplate: TemplateDefinitionBase<
+    Record<string, never>
+  >;
 
   constructor() {
     this.layoutTemplate = Handlebars.compile(LAYOUT_TEMPLATE.trim());
-    this.defaultFooterTemplate = Handlebars.compile(DEFAULT_FOOTER_TEMPLATE.trim());
+    this.defaultFooterTemplate = Handlebars.compile(
+      DEFAULT_FOOTER_TEMPLATE.trim(),
+    );
 
     this.genericTemplate = {
       subject: () => 'Define notification',
@@ -57,8 +62,10 @@ export class EmailTemplateService {
 
     this.templates = {
       'auth.welcome': {
-        subject: (data) => (data.name ? `Welcome to Define, ${data.name}!` : 'Welcome to Define!'),
-        previewText: () => 'Finish setting up your Define workspace in a few clicks.',
+        subject: (data) =>
+          data.name ? `Welcome to Define, ${data.name}!` : 'Welcome to Define!',
+        previewText: () =>
+          'Finish setting up your Define workspace in a few clicks.',
         bodyTemplate: this.compileFile('welcome.hbs'),
         textTemplate: Handlebars.compile(WELCOME_TEXT_TEMPLATE.trim()),
         prepareContext: (data) => ({
@@ -68,7 +75,8 @@ export class EmailTemplateService {
       },
       'auth.verify-email': {
         subject: () => 'Verify your email for Define',
-        previewText: () => 'Confirm your email to secure your Define workspace.',
+        previewText: () =>
+          'Confirm your email to secure your Define workspace.',
         bodyTemplate: this.compileFile('verify-email.hbs'),
         textTemplate: Handlebars.compile(VERIFY_TEXT_TEMPLATE.trim()),
         prepareContext: (data) => ({
@@ -80,7 +88,8 @@ export class EmailTemplateService {
       },
       'auth.login-alert': {
         subject: () => 'New sign-in to your Define account',
-        previewText: () => 'We spotted a fresh login and wanted to double check it was you.',
+        previewText: () =>
+          'We spotted a fresh login and wanted to double check it was you.',
         bodyTemplate: this.compileFile('login-new-device.hbs'),
         textTemplate: Handlebars.compile(LOGIN_ALERT_TEXT_TEMPLATE.trim()),
         prepareContext: (data) => ({
@@ -109,8 +118,11 @@ export class EmailTemplateService {
       },
       'auth.password-changed': {
         subject: (data) =>
-          data.name ? `Password updated, ${data.name}` : 'Your Define password was updated',
-        previewText: () => 'Here’s a quick confirmation of your recent password change.',
+          data.name
+            ? `Password updated, ${data.name}`
+            : 'Your Define password was updated',
+        previewText: () =>
+          'Here’s a quick confirmation of your recent password change.',
         bodyTemplate: this.compileFile('password-changed.hbs'),
         textTemplate: Handlebars.compile(PASSWORD_CHANGED_TEXT_TEMPLATE.trim()),
         prepareContext: (data) => ({
@@ -119,6 +131,20 @@ export class EmailTemplateService {
           supportHref: data.supportUrl ?? 'mailto:support@define.local',
           supportLabel: data.supportUrl ?? 'support@define.local',
           activityUrl: data.loginActivityUrl,
+        }),
+        fullDocument: true,
+      },
+      'payment.payment-link-created': {
+        subject: (data) => `Complete payment for ${data.serviceName}`,
+        previewText: () =>
+          'Use your secure define! payment link to confirm the booking.',
+        bodyTemplate: this.compileFile('payment-link-created.hbs'),
+        textTemplate: Handlebars.compile(
+          PAYMENT_LINK_CREATED_TEXT_TEMPLATE.trim(),
+        ),
+        prepareContext: (data) => ({
+          amount: this.formatAmount(data.amount),
+          year: new Date().getFullYear(),
         }),
         fullDocument: true,
       },
@@ -132,7 +158,10 @@ export class EmailTemplateService {
       return this.compileTemplate(definition, metadata.data);
     }
 
-    return this.compileTemplate(this.genericTemplate, {} as Record<string, never>);
+    return this.compileTemplate(
+      this.genericTemplate,
+      {} as Record<string, never>,
+    );
   }
 
   private compileTemplate<TData>(
@@ -150,7 +179,9 @@ export class EmailTemplateService {
       html = definition.bodyTemplate(context);
     } else {
       const body = definition.bodyTemplate(context);
-      const footer = (definition.footerTemplate ?? this.defaultFooterTemplate)(context);
+      const footer = (definition.footerTemplate ?? this.defaultFooterTemplate)(
+        context,
+      );
       html = this.layoutTemplate({ subject, previewText, body, footer });
     }
 
@@ -188,7 +219,10 @@ export class EmailTemplateService {
       .replace(/\r/g, '')
       .split('\n')
       .map((line) => line.trim())
-      .filter((line, index, arr) => line.length > 0 || (index > 0 && arr[index - 1].length > 0));
+      .filter(
+        (line, index, arr) =>
+          line.length > 0 || (index > 0 && arr[index - 1].length > 0),
+      );
 
     return normalized.join('\n').trim();
   }
@@ -203,6 +237,18 @@ export class EmailTemplateService {
     } catch {
       return input ?? 'Unknown time';
     }
+  }
+
+  private formatAmount(input: number | string): string {
+    const numeric = Number(input);
+    if (!Number.isFinite(numeric)) {
+      return String(input);
+    }
+
+    return new Intl.NumberFormat('en-ZA', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(numeric);
   }
 }
 
@@ -327,6 +373,26 @@ Your password was just updated{{#if changedAt}} on {{changedAt}}{{/if}}.
 If this was you, no action is needed.
 If you didn’t make this change, secure your account immediately{{#if activityUrl}}: {{activityUrl}}{{/if}}.
 Need help? {{supportLabel}}
+`;
+
+const PAYMENT_LINK_CREATED_TEXT_TEMPLATE = `
+{{#if customerName}}
+Hey {{customerName}},
+{{else}}
+Hey there,
+{{/if}}
+Your booking request has been received.
+To reserve your time slot and confirm your booking, please complete payment using this secure link: {{paymentUrl}}
+
+Booking details:
+Service: {{serviceName}}
+Provider: {{providerName}}
+Amount: {{currency}} {{amount}}
+{{#if paymentReference}}
+Reference: {{paymentReference}}
+{{/if}}
+
+Once payment is completed, your booking will be confirmed automatically.
 `;
 
 const GENERIC_BODY_TEMPLATE = `

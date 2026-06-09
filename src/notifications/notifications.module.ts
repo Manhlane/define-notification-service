@@ -9,9 +9,15 @@ import {
 import { MailgunService } from './mailgun.service';
 import { EmailTemplateService } from './templates/email-template.service';
 import { AuthNotificationsController } from './auth-notifications.controller';
+import { PaymentNotificationsController } from './payment-notifications.controller';
 
 @Module({
-  controllers: [NotificationsController, AuthNotificationsController, NotificationsConsumer],
+  controllers: [
+    NotificationsController,
+    AuthNotificationsController,
+    PaymentNotificationsController,
+    NotificationsConsumer,
+  ],
   providers: [
     {
       provide: RABBITMQ_NOTIFICATIONS_CLIENT,

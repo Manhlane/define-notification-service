@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Complete Your Payment | define!.</title>
+  </head>
+
+  <body style="margin:0; padding:0; background:#ffffff; font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; color:#000;">
+
+    <div style="max-width:560px; margin:72px auto; padding:0 24px;">
+
+      <!-- Logo -->
+      <div style="font-size:20px; font-weight:600; letter-spacing:-0.02em;">
+        define!.
+      </div>
+
+      <!-- Hero -->
+      <h1 style="margin:56px 0 28px; font-size:44px; font-weight:600; line-height:1.05; letter-spacing:-0.03em;">
+        Your booking is almost confirmed.
+      </h1>
+
+      <!-- Greeting -->
+      <p style="margin:0 0 20px; font-size:18px; line-height:1.6;">
+        Hey {{#if customerName}}{{customerName}}{{else}}there{{/if}},
+      </p>
+
+      <!-- Core Message -->
+      <p style="margin:0 0 20px; font-size:18px; line-height:1.6;">
+        Your booking request has been received.
+      </p>
+
+      <p style="margin:0 0 20px; font-size:18px; line-height:1.6;">
+        To reserve your time slot and confirm your booking, please complete payment using the secure link below.
+      </p>
+
+      <p style="margin:0 0 36px; font-size:18px; line-height:1.6;">
+        Once payment is completed, your booking will be confirmed automatically.
+      </p>
+
+      {{#if paymentUrl}}
+        <div style="margin-bottom:40px;">
+          <a href="{{paymentUrl}}"
+             style="display:inline-block;
+                    background:#fff;
+                    color:#000;
+                    border:2px solid #000;
+                    text-decoration:none;
+                    padding:16px 28px;
+                    font-size:15px;
+                    font-weight:600;
+                    border-radius:8px;">
+            Complete payment
+          </a>
+        </div>
+      {{/if}}
+
+      <!-- Booking Details -->
+      <div style="margin-top:48px; font-size:16px; line-height:1.6;">
+
+        <p style="margin:0 0 16px;">
+          Booking details:
+        </p>
+
+        <p style="margin:0 0 8px;">
+          <strong>Service:</strong> {{serviceName}}
+        </p>
+
+        <p style="margin:0 0 8px;">
+          <strong>Provider:</strong> {{providerName}}
+        </p>
+
+        <p style="margin:0 0 8px;">
+          <strong>Amount:</strong> {{currency}} {{amount}}
+        </p>
+
+        {{#if paymentReference}}
+        <p style="margin:0 0 16px;">
+          <strong>Reference:</strong> {{paymentReference}}
+        </p>
+        {{/if}}
+
+      </div>
+
+      <!-- define! Message -->
+      <div style="margin-top:48px; font-size:16px; line-height:1.6;">
+
+        <p style="margin:0 0 16px;">
+          At define!, we believe creators should spend their time creating -
+          not chasing payments.
+        </p>
+
+        <p style="margin:0;">
+          Every payment request is simple, secure, and designed to protect both
+          clients and service providers.
+        </p>
+
+      </div>
+
+      <!-- Closing -->
+      <div style="margin-top:64px; font-size:14px;">
+        <p style="margin:0 0 8px;">
+          Thank you for choosing define!.
+        </p>
+
+        <p style="margin:0;">
+          Secure bookings. Secure payments.
+        </p>
+      </div>
+
+      <!-- Footer -->
+      <div style="margin-top:40px; font-size:12px; color:#6b7280;">
+        © {{year}} define!.
+      </div>
+
+    </div>
+
+  </body>
+</html>
