@@ -5,7 +5,9 @@ export type AuthNotificationTemplate =
   | 'auth.password-reset'
   | 'auth.password-changed';
 
-export type PaymentNotificationTemplate = 'payment.payment-link-created';
+export type PaymentNotificationTemplate =
+  | 'payment.payment-link-created'
+  | 'payment.provider-booking-request';
 
 export type NotificationTemplate =
   | AuthNotificationTemplate

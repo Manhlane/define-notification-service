@@ -24,6 +24,7 @@
     "preview:login": "ts-node --project tsconfig.json scripts/render-email.ts auth.login-alert",
     "preview:password-change": "ts-node --project tsconfig.json scripts/render-email.ts auth.password-changed",
     "preview:payment-link": "ts-node --project tsconfig.json scripts/render-email.ts payment.payment-link-created",
+    "preview:provider-booking": "ts-node --project tsconfig.json scripts/render-email.ts payment.provider-booking-request",
     "preview:emails": "ts-node --project tsconfig.json scripts/render-email.ts all"
   },
   "dependencies": {

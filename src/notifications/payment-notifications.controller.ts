@@ -39,6 +39,29 @@ class PaymentLinkCreatedEmailDto {
   paymentReference?: string;
 }
 
+class ProviderBookingRequestEmailDto {
+  @ApiProperty({ description: 'Service provider email address' })
+  email!: string;
+
+  @ApiProperty({ required: false, description: 'Service provider name' })
+  providerName?: string;
+
+  @ApiProperty({ description: 'Service or booking name' })
+  serviceName!: string;
+
+  @ApiProperty({ description: 'Customer name' })
+  customerName!: string;
+
+  @ApiProperty({ example: 'ZAR' })
+  currency!: string;
+
+  @ApiProperty({ example: 8500 })
+  amount!: number | string;
+
+  @ApiProperty({ description: 'Payment or booking reference' })
+  paymentReference!: string;
+}
+
 @ApiTags('payment-notifications')
 @Controller('notifications/payments')
 export class PaymentNotificationsController {
@@ -91,6 +114,44 @@ export class PaymentNotificationsController {
     this.logger.log({
       event: 'PAYMENT_LINK_EMAIL_ENQUEUED',
       template: 'payment.payment-link-created',
+      recipient: dto.email,
+      notificationId: record.id,
+      ip: meta.ip,
+      userAgent: meta.userAgent,
+    });
+
+    return record;
+  }
+
+  @Post('provider-booking-request')
+  @ApiBody({ type: ProviderBookingRequestEmailDto })
+  @ApiCreatedResponse({ type: NotificationRecordDto })
+  async sendProviderBookingRequest(
+    @Body() dto: ProviderBookingRequestEmailDto,
+    @Req() req: Request,
+  ): Promise<NotificationRecord> {
+    const meta = this.extractRequestMeta(req);
+    const record = await this.notificationsService.enqueue({
+      channel: 'email',
+      recipient: dto.email,
+      subject: 'New Booking Request | define!.',
+      body: `Provider booking request queued for ${dto.email}`,
+      metadata: {
+        template: 'payment.provider-booking-request',
+        data: {
+          providerName: dto.providerName,
+          serviceName: dto.serviceName,
+          customerName: dto.customerName,
+          currency: dto.currency,
+          amount: dto.amount,
+          paymentReference: dto.paymentReference,
+        },
+      },
+    });
+
+    this.logger.log({
+      event: 'PROVIDER_BOOKING_REQUEST_EMAIL_ENQUEUED',
+      template: 'payment.provider-booking-request',
       recipient: dto.email,
       notificationId: record.id,
       ip: meta.ip,

@@ -83,6 +83,20 @@ const PREVIEWS: Record<NotificationTemplate, PreviewConfig> = {
     },
     fileName: 'payment-link-created-preview.html',
   },
+  'payment.provider-booking-request': {
+    metadata: {
+      template: 'payment.provider-booking-request',
+      data: {
+        providerName: 'Ava',
+        serviceName: 'Wedding Photography - Full Day',
+        customerName: 'Thandi Mokoena',
+        currency: 'ZAR',
+        amount: 8500,
+        paymentReference: 'DFN-2026-0001',
+      },
+    },
+    fileName: 'provider-booking-request-preview.html',
+  },
 };
 
 async function render(target?: NotificationTemplate | 'all'): Promise<void> {

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>New Booking Request | define!.</title>
+  </head>
+
+  <body style="margin:0; padding:0; background:#ffffff; font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; color:#000;">
+
+    <div style="max-width:560px; margin:72px auto; padding:0 24px;">
+
+      <!-- Logo -->
+      <div style="font-size:20px; font-weight:600; letter-spacing:-0.02em;">
+        define!.
+      </div>
+
+      <!-- Hero -->
+      <h1 style="margin:56px 0 28px; font-size:44px; font-weight:600; line-height:1.05; letter-spacing:-0.03em;">
+        Someone is ready to book you.
+      </h1>
+
+      <!-- Greeting -->
+      <p style="margin:0 0 20px; font-size:18px; line-height:1.6;">
+        Hey {{#if providerName}}{{providerName}}{{else}}there{{/if}},
+      </p>
+
+      <!-- Core Message -->
+      <p style="margin:0 0 20px; font-size:18px; line-height:1.6;">
+        A customer has requested to book your service through define!.
+      </p>
+
+      <p style="margin:0 0 20px; font-size:18px; line-height:1.6;">
+        We've sent them a secure payment link to complete their booking. Once payment is received, we'll automatically confirm the booking and notify you.
+      </p>
+
+      <p style="margin:0 0 36px; font-size:18px; line-height:1.6;">
+        Until payment is completed, this booking remains pending.
+      </p>
+
+      <!-- Booking Details -->
+      <div style="margin-top:48px; font-size:16px; line-height:1.6;">
+
+        <p style="margin:0 0 16px;">
+          Booking details:
+        </p>
+
+        <p style="margin:0 0 8px;">
+          <strong>Service:</strong> {{serviceName}}
+        </p>
+
+        <p style="margin:0 0 8px;">
+          <strong>Customer:</strong> {{customerName}}
+        </p>
+
+        <p style="margin:0 0 8px;">
+          <strong>Amount:</strong> {{currency}} {{amount}}
+        </p>
+
+        <p style="margin:0 0 8px;">
+          <strong>Reference:</strong> {{paymentReference}}
+        </p>
+
+        <p style="margin:0 0 16px;">
+          <strong>Status:</strong> Awaiting Payment
+        </p>
+
+      </div>
+
+      <!-- Provider Message -->
+      <div style="margin-top:48px; font-size:16px; line-height:1.6;">
+
+        <p style="margin:0 0 16px;">
+          define!. helps protect both service providers and customers by ensuring bookings are secured through verified payments before confirmation.
+        </p>
+
+        <p style="margin:0;">
+          You'll receive another notification as soon as payment has been completed.
+        </p>
+
+      </div>
+
+      <!-- Closing -->
+      <div style="margin-top:64px; font-size:14px;">
+        <p style="margin:0 0 8px;">
+          Thank you for using define!.
+        </p>
+
+        <p style="margin:0;">
+          Secure bookings. Secure payments.
+        </p>
+      </div>
+
+      <!-- Footer -->
+      <div style="margin-top:40px; font-size:12px; color:#6b7280;">
+        © {{year}} define!.
+      </div>
+
+    </div>
+
+  </body>
+</html>

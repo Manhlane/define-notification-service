@@ -42,6 +42,14 @@ export type PaymentTemplatePayloadMap = {
     amount: number | string;
     paymentReference?: string;
   };
+  'payment.provider-booking-request': {
+    providerName?: string;
+    serviceName: string;
+    customerName: string;
+    currency: string;
+    amount: number | string;
+    paymentReference: string;
+  };
 };
 
 export type NotificationMetadataMap = AuthTemplatePayloadMap &

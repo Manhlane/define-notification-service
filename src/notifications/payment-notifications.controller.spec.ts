@@ -77,4 +77,29 @@ describe('PaymentNotificationsController', () => {
     });
     expect(service.list()[0]).toEqual(record);
   });
+
+  it('queues a provider booking request email with metadata', async () => {
+    const record = await controller.sendProviderBookingRequest(
+      {
+        email: 'provider@example.com',
+        providerName: 'Ava',
+        serviceName: 'Wedding Photography - Full Day',
+        customerName: 'Thandi Mokoena',
+        currency: 'ZAR',
+        amount: 8500,
+        paymentReference: 'DFN-2026-0001',
+      },
+      { headers: {}, socket: {} } as any,
+    );
+
+    expect(record.metadata).toMatchObject({
+      template: 'payment.provider-booking-request',
+      data: expect.objectContaining({
+        serviceName: 'Wedding Photography - Full Day',
+        customerName: 'Thandi Mokoena',
+        paymentReference: 'DFN-2026-0001',
+      }),
+    });
+    expect(service.list()[0]).toEqual(record);
+  });
 });

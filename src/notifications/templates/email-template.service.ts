@@ -148,6 +148,20 @@ export class EmailTemplateService {
         }),
         fullDocument: true,
       },
+      'payment.provider-booking-request': {
+        subject: () => 'New Booking Request | define!.',
+        previewText: () =>
+          'A customer has requested to book your service through define!.',
+        bodyTemplate: this.compileFile('provider-booking-request.hbs'),
+        textTemplate: Handlebars.compile(
+          PROVIDER_BOOKING_REQUEST_TEXT_TEMPLATE.trim(),
+        ),
+        prepareContext: (data) => ({
+          amount: this.formatAmount(data.amount),
+          year: new Date().getFullYear(),
+        }),
+        fullDocument: true,
+      },
     } as TemplateDefinitionMap;
   }
 
@@ -393,6 +407,30 @@ Reference: {{paymentReference}}
 {{/if}}
 
 Once payment is completed, your booking will be confirmed automatically.
+`;
+
+const PROVIDER_BOOKING_REQUEST_TEXT_TEMPLATE = `
+{{#if providerName}}
+Hey {{providerName}},
+{{else}}
+Hey there,
+{{/if}}
+A customer has requested to book your service through define!.
+We've sent them a secure payment link to complete their booking. Once payment is received, we'll automatically confirm the booking and notify you.
+Until payment is completed, this booking remains pending.
+
+Booking details:
+Service: {{serviceName}}
+Customer: {{customerName}}
+Amount: {{currency}} {{amount}}
+Reference: {{paymentReference}}
+Status: Awaiting Payment
+
+define!. helps protect both service providers and customers by ensuring bookings are secured through verified payments before confirmation.
+You'll receive another notification as soon as payment has been completed.
+
+Thank you for using define!.
+Secure bookings. Secure payments.
 `;
 
 const GENERIC_BODY_TEMPLATE = `
